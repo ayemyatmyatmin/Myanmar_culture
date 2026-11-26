@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>大阪のミャンマーレストラン</title>
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+html{
+  scroll-behavior:smooth;
+}
+body{
+  font-family:"Times New Roman", serif;
+  background:#080808;
+  color:#f7eedc;
+}
+.header{
+  text-align: center;
+  font-size: 23px;
+  background:rgba(0,0,0,0.75);
+}
+#restaurantCards{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:30px;
+  margin-top:40px;
+}
+
+.restaurant-card{
+  width:380px;
+  background:#151515;
+  border:1px solid #d4af37;
+  border-radius:16px;
+  overflow:hidden;
+  text-align:center;
+  padding-bottom:20px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.restaurant-card:hover{
+  transform:translateY(-6px);
+}
+
+.restaurant-card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  display:block;
+}
+
+.restaurant-card h2{
+  color:#d4af37;
+  margin:18px 10px 10px;
+}
+
+.restaurant-card p{
+  color:white;
+  margin:6px 12px;
+}
+
+a{
+  color:antiquewhite ;
+}
+</style>
+</head>
+
+<body>
+  <button type="button" onclick="goToMain()" style="width: 150px; height: 50px; border-radius: 20px; background-color:#d4af37; color:#1f1e1d;">
+      メインページへ戻る
+  </button>
+<div class="header">
+  <h1>大阪のミャンマーレストラン</h1><br>
+  <p>大阪で楽しめるミャンマー料理店を紹介します。</p><br>
+</div>
+
+<div id="restaurantList">
+  <h2 class="header">Restaurant List</h2>
+  <div id="restaurantCards" class="restaurant-cards"></div>
+</div>
+
+<script>
+function goToMain(){
+    location.href = "myanmar_food_div_clean.html";
+}
+var restaurantNames = [
+    "Mandalay HOUSE",
+    "DAIKHIN",
+    "SAR YA AUNG"
+];
+
+var restaurantPhotos = [
+    "mandalay.jpg",
+    "daikhin.jpg",
+    "sar.jpg"
+];
+
+var restaurantRatings = [
+    "4.6",
+    "4.5",
+    "3.9"
+];
+
+var restaurantAddresses = [
+    "大阪府大阪市港区弁天4-12-25",
+    "大阪府大阪市中央区瓦屋町3-4-9",
+    "大阪府大阪市西成区花園北2-6-20 1F"
+];
+
+var restaurantLinks = [
+    "https://maps.app.goo.gl/QdTgKouya7pRUBBQ9",
+    "https://maps.app.goo.gl/TgFUy6eXnVnhfcPP7",
+    "https://maps.app.goo.gl/vDcon2XWRR8CNPUG8"
+];
+function showRestaurants(){
+
+    var html = "";
+
+    for(var i=0; i<restaurantNames.length; i++){
+      html += "<div class='restaurant-card' onclick='showDetail(" + i + ")'>";
+      html += "<img src='rest/" + restaurantPhotos[i] + "'>";
+      html += "<h2>" + restaurantNames[i] + "</h2>";
+      html += "<p>⭐ " + restaurantRatings[i] + "</p>";
+      html += "<p>" + restaurantAddresses[i] + "</p>";
+      html += "<a href='" + restaurantLinks[i] + "'>";
+      html += "📍 Google Map へ 。。。";
+      html += "</a>";
+      html += "</div>";
+    }
+
+    document.getElementById("restaurantCards").innerHTML = html;
+}
+showRestaurants();
+</script>
+
+</body>
+</html>

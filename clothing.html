@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myanmar Traditional Clothing</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: #080808;
+            color: #f7eedc;
+            font-family: Georgia, 'Yu Mincho', serif
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 5%;
+            border-bottom: 1px solid #80652e;
+            background: #100c0b;
+            position: relative;
+            z-index: 5
+        }
+
+        header strong {
+            color: #d4af37;
+            font-size: 24px
+        }
+
+        nav {
+            display: flex;
+            gap: 24px
+        }
+
+        nav a:hover {
+            color: #d4af37
+        }
+
+        .hero {
+            position: relative;
+            min-height: 85vh;
+            isolation: isolate;
+            overflow: hidden;
+            background: linear-gradient(90deg, #210b0ddd, transparent 70%), url('images/clothing-bg.png') center/cover, #391719
+        }
+
+        .hero h1 {
+            position: absolute;
+            top: 15%;
+            left: 5%;
+            right: 5%;
+            font-size: clamp(40px, 9vw, 145px);
+            line-height: .95;
+            color: #e8c681;
+            letter-spacing: -.04em;
+            z-index: 1
+        }
+
+        .hero h1 span {
+            display: block;
+            text-align: right
+        }
+
+        .model {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 94%;
+            width: 65%;
+            object-fit: contain;
+            object-position: bottom;
+            z-index: 2;
+            pointer-events: none
+        }
+
+        .intro {
+            position: absolute;
+            left: 6%;
+            bottom: 12%;
+            width: 28%;
+            z-index: 3;
+            line-height: 1.9;
+            text-shadow: 0 2px 8px black
+        }
+
+        .btn {
+            display: inline-block;
+            border: 1px solid #d4af37;
+            border-radius: 30px;
+            padding: 12px 24px;
+            color: #f5d997;
+            background: #160c0cbb;
+            margin-top: 20px
+        }
+
+        .btn:hover {
+            background: #d4af37;
+            color: #080808
+        }
+
+        .inset {
+            position: absolute;
+            right: 6%;
+            bottom: 8%;
+            width: 16%;
+            z-index: 3;
+            border: 2px solid #e8c681;
+            transition: .4s
+        }
+
+        .inset:hover {
+            transform: scale(1.15)
+        }
+
+        .collection {
+            max-width: 1350px;
+            margin: auto;
+            padding: 90px 5%
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 50px
+        }
+
+        .heading h2 {
+            font-size: clamp(32px, 5vw, 64px);
+            color: #d4af37;
+            margin: 12px
+        }
+
+        .heading p {
+            line-height: 1.8
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 40px 28px;
+            align-items: start
+        }
+
+        .card {
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin: 0
+        }
+
+        .card img {
+            width: 100%;
+            height: 340px;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+            transition: transform .5s
+        }
+
+        .card:hover img {
+            transform: scale(1.07)
+        }
+
+        .card h3 {
+            position: relative;
+            background: #080808;
+            padding: 15px 0;
+            color: #d4af37;
+            font-size: 24px
+        }
+
+        .card small {
+            display: block;
+            color: #b9aa91;
+            font-size: 13px;
+            margin-top: 6px
+        }
+
+        .fade {
+            animation: appear 1s ease both
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                translate: 0 20px
+            }
+
+            to {
+                opacity: 1;
+                translate: 0 0
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #80652e;
+            color: #d4af37
+        }
+
+        @media(max-width:700px) {
+            header {
+                flex-direction: column;
+                gap: 15px
+            }
+
+            .hero {
+                min-height: 680px
+            }
+
+            .hero h1 {
+                top: 8%
+            }
+
+            .model {
+                width: 100%;
+                height: 70%;
+                bottom: 12%
+            }
+
+            .intro {
+                width: 88%;
+                bottom: 4%;
+                background: #160c0caa;
+                padding: 12px
+            }
+
+            .inset {
+                display: none
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 20px
+            }
+
+            .card h3 {
+                font-size: 19px
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header><strong>Myanmar Culture Journey</strong>
+        <nav><a href="index.html">Home</a><a href="myanmar_food_div_clean.html">Food</a><a href="clothing.html"
+                aria-current="page">Clothing</a></nav>
+    </header>
+    <section class="hero">
+        <h1 class="fade">MYANMAR<span>TRADITIONAL</span></h1>
+        <div class="intro fade">
+            <p>美しさに宿る、歴史と文化。</p>
+            <p>ミャンマーの多彩な民族衣装の世界へ。</p><a class="btn" href="#collection">民族衣装を見る ↓</a>
+        </div>
+    </section>
+    <section class="collection" id="collection">
+        <div class="heading">
+            <p>THE COLLECTION</p>
+            <h2>民族衣装コレクション</h2>
+            <p>地域や民族ごとの美しさを見つけてみましょう。</p>
+        </div>
+        <div class="gallery" id="gallery"></div>
+    </section>
+    <footer>© Myanmar Culture Journey</footer>
+    <script>
+        var collections = [['カチン', 'kachin'], ['カヤー', 'kayah'], ['カレン', 'kayin'], ['チン', 'chin'], ['ビルマ', 'bamar'], ['モン', 'mon'], ['ラカイン', 'rakhine'], ['シャン地域', 'shan'], ['ナガ', 'naga']];
+        var gallery = document.getElementById('gallery');
+        for (var i = 0; i < collections.length; i++) {
+            var name = collections[i][0], key = collections[i][1];
+            var card = document.createElement('a');
+            card.className = 'card';
+            card.href = key + '.html';
+            card.innerHTML = '<img loading="lazy" src="costumes/' + key + '/main.jpg" alt="' + name + 'の民族衣装"><h3>' + name + '<small>COLLECTION ' + String(i + 1).padStart(2, '0') + ' — 展示を見る →</small></h3>';
+            gallery.appendChild(card);
+        }
+    </script>
+</body>
+
+</html>

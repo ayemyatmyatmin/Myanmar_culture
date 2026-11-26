@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Myanmar Food Journey</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Times New Roman", serif;
+      background: #080808;
+      color: #f7eedc;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.75);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+    }
+
+    .navbar {
+      height: 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 60px;
+    }
+
+    .logo {
+      color: #d4af37;
+      font-size: 40px;
+      font-weight: bold;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 28px;
+    }
+
+    .nav-menu a {
+      color: #f7eedc;
+      text-decoration: none;
+      font-size: 25px;
+    }
+
+    .nav-menu a:hover {
+      color: #d4af37;
+    }
+
+    #map {
+      position: relative;
+      width: 450px;
+      margin: auto;
+    }
+
+    #map img {
+      width: 450px;
+      display: block;
+    }
+
+    .hero {
+      width: 100%;
+      height: 100vh;
+      background-image:
+        linear-gradient(rgba(0, 0, 0, .50), rgba(0, 0, 0, .65)),
+        url("hero.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 65px;
+      color: #d4af37;
+      margin-bottom: 20px;
+      text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .hero p {
+      font-size: 22px;
+      margin-bottom: 30px;
+    }
+
+    button {
+      padding: 12px 30px;
+      border: 1px solid #d4af37;
+      border-radius: 30px;
+      background: transparent;
+      color: #d4af37;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #d4af37;
+      color: #080808;
+    }
+
+
+    .section {
+      padding: 90px 60px;
+      text-align: center;
+    }
+
+    .section:nth-child(even) {
+      background: #111;
+    }
+
+    .section h2 {
+      font-size: 40px;
+      color: #d4af37;
+      margin-bottom: 40px;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .card,
+    .food-card {
+      width: 280px;
+      background: #151515;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      transition: 0.3s;
+    }
+
+    .card:hover,
+    .food-card:hover {
+      transform: translateY(-8px);
+      border-color: #d4af37;
+    }
+
+    .card img,
+    .food-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+
+    .card h3,
+    .food-card h3 {
+      color: #d4af37;
+      margin: 18px 15px 10px;
+    }
+
+    .card p,
+    .food-card p {
+      padding: 0 18px 22px;
+      line-height: 1.6;
+    }
+
+    .foodlayout {
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+
+    }
+
+    #ppup {
+      width: 100%;
+    }
+
+    .regional-layout {
+      position: relative;
+      width: 1100px;
+      height: 0;
+      margin: 0 auto;
+    }
+
+    .photo-box {
+      position: absolute;
+      width: 230px;
+      height: auto;
+      background: #151515;
+      border: 2px solid #d4af37;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .photo-box img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-text {
+      padding: 12px;
+      text-align: center;
+    }
+
+    .photo-text h3 {
+      color: #d4af37;
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .photo-text p {
+      color: white;
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .photo1 {
+      left: 0;
+      top: -900px;
+    }
+
+    .photo2 {
+      right: 0;
+      top: -900px;
+    }
+
+    .photo3 {
+      left: 30px;
+      top: -520px;
+    }
+
+    .photo4 {
+      right: 30px;
+      top: -520px;
+    }
+
+    .region-info {
+      position: absolute;
+      width: 420px;
+      left: 340px;
+      top: -110px;
+      text-align: center;
+      color: white;
+    }
+
+    .region-info h2 {
+      color: #d4af37;
+      margin-bottom: 12px;
+    }
+
+    .filter-buttons {
+      margin-bottom: 35px;
+    }
+
+    .filter-buttons button {
+      margin: 5px;
+    }
+
+    #quest_page {
+      margin-left: 220px;
+      background: #F7F4FA;
+      border-radius: 20px;
+    }
+
+    #puzzleBoard {
+      width: 400px;
+      height: 400px;
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      grid-template-rows: repeat(4, 100px);
+      gap: 2px;
+      background: rgba(212, 175, 55, 0.4);
+      flex-shrink: 0;
+
+    }
+
+    .puzzle-piece {
+      width: 100px;
+      height: 100px;
+      background-size: 400px 400px;
+      border: 1px solid rgb(201, 144, 0);
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+
+    .selected-piece {
+      filter: brightness(60%);
+    }
+
+    #hint {
+      display: none;
+      position: fixed;
+      top: 55%;
+      left: 65%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, .25);
+      text-align: center;
+    }
+
+    #hint img {
+      width: 350px;
+      height: 300px;
+      border-radius: 15px;
+    }
+
+    .footer {
+      background: #000;
+      color: #d4af37;
+      text-align: center;
+      padding: 25px;
+      border-top: 1px solid rgba(212, 175, 55, 0.4);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <div class="navbar">
+      <div class="logo">Myanmar Food Journey</div>
+
+      <ul class="nav-menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#food">Food</a></li>
+        <li><a href="#restaurant">Restaurant</a></li>
+        <li><a href="#game">Puzzle Game</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="home" class="hero">
+    <div class="hero-text">
+      <h1>Myanmar Food Journey</h1>
+      <p>遊びながらミャンマーの食文化を学べる</p>
+      <button onclick="location.href='#food'">Explore Foods</button>
+    </div>
+  </div>
+
+  <div id="food" class="section">
+    <h2>Food Category</h2>
+
+    <div class="filter-buttons">
+      <button onclick="filterFood('all')">All</button>
+      <button onclick="filterFood('festival')">Festival</button>
+      <button onclick="filterFood('regional')">Regional</button>
+      <button onclick="filterFood('street')">Street Food</button>
+    </div>
+
+    <div class="card-container">
+      <div class="food-card festival">
+        <img src="images/lone.jpg" alt="モンロンイェーボー">
+        <h3>モンロンイェーボー</h3>
+        <p>祭りで食べる甘いお菓子です。</p>
+      </div>
+
+      <div class="food-card festival">
+        <img src="images/htamane.jpg" alt="タマネ">
+        <h3>タマネ</h3>
+        <p>もち米、ごま、ピーナッツなどで作る料理です。</p>
+      </div>
+      <div class="food-card street">
+        <img src="images/mlmy.jpg" alt="モンリンマヤー">
+        <h3>モンリンマヤー</h3>
+        <p>二つを合わせて焼くので、「夫婦のお菓子」と呼ばれます。</p>
+      </div>
+
+      <div class="food-card street">
+        <img src="images/porkstick.jpg" alt="豚肉の串煮">
+        <h3>豚肉の串煮</h3>
+        <p>やわらかく煮込んだ豚肉を串にさした人気の屋台料理です。</p>
+      </div>
+
+      <div class="food-card street">
+        <img src="images/tealeaf.jpg" alt="ラペットゥ">
+        <h3>ラペットゥ</h3>
+        <p>発酵したお茶の葉を使ったミャンマーの伝統サラダです。</p>
+      </div>
+      <div class="food-card street">
+        <img src="images/shweyinaye.jpg" alt="シュエインエー">
+        <h3>シュエインエー</h3>
+        <p>ココナッツミルクとゼリーで作る冷たいミャンマーのデザートです。</p>
+      </div>
+      <div class="food-card street">
+        <img src="images/akyaw.jpg" alt="ミャンマー風揚げ物">
+        <h3>ミャンマー風揚げ物</h3>
+        <p>いろいろな揚げ物を楽しめる人気の屋台料理です。</p>
+      </div>
+    </div>
+  </div>
+  <div class="all">
+    <div id="map">
+      <img src="m.png" alt="">
+    </div>
+    <div id="ppup"></div>
+  </div>
+  <div id="foodCard"></div>
+  <div id="restaurant" class="section">
+    <h2>Restaurant in Japan</h2>
+
+    <div class="card-container">
+      <div class="card" onclick="goToOsaka()">
+        <h3>大阪</h3>
+        <p>大阪で食べられるミャンマー料理店を紹介します。</p>
+      </div></a>
+
+      <div class="card" onclick="goToTokyo()">
+        <h3>東京</h3>
+        <p>東京で食べられるミャンマー料理店を紹介します。</p>
+      </div>
+
+      <div class="card" onclick="goToKyoto()">
+        <h3>京都</h3>
+        <p>京都で食べられるミャンマー料理店を紹介します。</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="game" class="section game-section">
+    <h2>Food Puzzle Game</h2>
+    <p>料理の写真を完成させて、ミャンマー料理を学びましょう。</p>
+    <div id="puzzleTitle"></div>
+    <div id="puzzleBoard"></div>
+    <div id="hint"></div>
+    <br>
+    <button onclick="startPuzzle()">ゲーム開始</button>
+    <button onclick="shufflePuzzle()">シャッフル</button>
+    <button onclick="showHint()">ヒント</button>
+  </div>
+
+  <div class="footer">
+    <p> Myanmar Food Journey　</p>
+  </div>
+
+  <script>
+    var names = [
+      ["サーピェ", "カチン風鶏肉料理", "カチン伝統料理", "シャッジャム"],
+      ["シュエボー米"],
+      ["サブティ", "ヴォークサ・レップ", "サトゥルアック", "チャンバン"],
+      ["シャン豆腐の揚げ物（トーフージョー）", "シャン豆腐ヌエ", "カウボート", "シャンカウスエ"],
+      ["マンダレー・ミーシェー", "ナンジートゥ", "トーモン", "サヌイン・マキン"],
+      ["ゴマ飴", "ピーナッツ飴"],
+      ["ラカイン・モンティ", "アープーシャープー", "ラカイン風シーフードサラダ", "ラウサー"],
+      ["カヤー風ソーセージの唐揚げ", "ヒン・トウッ", "カヤー風つきご飯", "カヤー・カウンイェ"],
+      ["ハラワ", "ミャウンミャ・モヒンガー", "ショウガサラダ", "ラブッタ風 発酵エビと魚"],
+      ["タラポー", "タンヨー・カレー", "チン風鶏肉の煮込み", "竹筒もち米ご飯"],
+      ["モン・レッサウン"],
+      ["ヤンゴン・モヒンガー", "オンノー・カウスエ"],
+      ["シャン風ライスサラダ", "ティンジャン・タミン", "モン風魚カレー", "モン風エビペースト炒め"],
+      ["タニンダーリ地方のモヒンガー", "カッジー・カイト", "タークェ・ヤイン"]
+    ];
+
+    var photos = [
+      ["kachin1.jpg", "kachin2.jpg", "kachin3.jpg", "kachin4.png"],
+      ["sagaing1.jpg"],
+      ["chin1.jpg", "chin2.jpg", "chin3.jpg", "chin4.jpg"],
+      ["shan1.jpg", "shan2.jpg", "shan3.jpg", "shan4.jpg"],
+      ["mandalay1.jpg", "mandalay2.jpg", "mandalay3.jpg", "mandalay4.jpg"],
+      ["magway1.jpg", "magway2.jpg"],
+      ["rakhine1.jpg", "rakhine2.jpg", "rakhine3.jpg", "rakhine4.jpg"],
+      ["kayah1.jpg", "kayah2.jpg", "kayah3.jpg", "kayah4.jpg"],
+      ["ayeyarwady1.jpg", "ayeyarwady2.jpg", "ayeyarwady3.jpg", "ayeyarwady4.jpg"],
+      ["kayin1.jpg", "kayin2.jpg", "kayin3.jpg", "kayin4.jpg"],
+      ["bago2.jpg"],
+      ["yangon1.jpg", "yangon2.jpg"],
+      ["mon1.jpg", "mon2.jpg", "mon3.jpg", "mon4.jpg"],
+      ["tani1.jpg", "tani2.jpg", "tani3.jpg"]
+    ];
+
+    var explas = [
+      [
+        "豚肉または牛肉入りのビーフンスープで、酸味のあるハーブソースを添えた伝統料理です。",
+        "地元のハーブと香辛料で味付けした、カチン州の伝統的な鶏肉料理です。",
+        "肉料理や野菜料理、ご飯などをバナナの葉の上に並べて楽しむ、カチン州の伝統的な食事です",
+        "野菜やハーブ、肉をご飯と混ぜて作る、カチン州の伝統的な混ぜご飯です。"
+      ],
+      [
+        "香りのよいザガイン地方の有名なお米です。"
+      ],
+      [
+        "トウモロコシと豚肉、豆、地元のハーブを使ったチン州の伝統的なおかゆです。",
+        "豚肉を燻製または焼いて作る、チン州の伝統料理です。",
+        "もち米と豚肉を使った、チン州の伝統的なおかゆ料理です。",
+        "米粉で作り、ごまをのせたチン州の伝統的なお菓子です。"
+      ],
+      [
+        "カリッと揚げたシャン豆腐を、ごま入りの特製ソースで味わう伝統料理です。",
+        "ひよこ豆で作った温かくてなめらかな豆腐に、ラー油やピーナッツ、ハーブを添えたシャン州の伝統料理です。",
+        "カリッと揚げた米粉餅を特製のタレで味わう、シャン州の伝統料理です。",
+        "特製ソースとピーナッツ、ハーブを添えた、シャン州の伝統的な米麺料理です。"
+      ],
+      [
+        "鶏肉や漬物、特製ソースで味わう、マンダレーの伝統的な麺料理です。",
+        "鶏肉やゆで卵、特製ソースで和えた、マンダレーの伝統的な太い米麺料理です。",
+        "もち米粉で作り、カシューナッツやレーズンをのせた、マンダレーの伝統的なお菓子です。",
+        "セモリナ粉で作り、炒りごまをのせた、マンダレーの伝統的なお菓子です。"
+      ],
+      [
+        "ごまと砂糖で作る、マグウェ地方の伝統的なお菓子です。",
+        "ピーナッツと砂糖で作る、マグウェ地方の伝統的なお菓子です。"
+      ],
+      [
+        "魚のすり身や特製ソースで味わう、ラカイン州の伝統的な米麺料理です。",
+        "魚だしのスープと細い米麺を使った、ラカイン州の伝統的な麺料理です。",
+        "新鮮な魚介類とハーブを、酸味と辛味のあるドレッシングで和えたラカイン州の伝統料理です。",
+        "温かいご飯で作る、ラカイン州の伝統的なおかゆ料理です。"
+      ],
+      [
+        "地元の香辛料で味付けしたソーセージを揚げた、カヤー州の伝統料理です。",
+        "野菜やハーブをバナナの葉で包んで蒸した、カヤー州の伝統料理です。",
+        "ついたご飯を地元の香辛料で味付けした、カヤー州の伝統料理です。",
+        "発酵させた米から作る、カヤー州の伝統的な飲み物です。"
+      ],
+      [
+        "もち米粉とココナッツミルク、砂糖で作る、エーヤワディ地方の伝統的なお菓子です。",
+        "魚のだし汁と米麺を使った、エーヤワディ地方の伝統的な麺料理です。",
+        "新鮮な生姜と野菜を和えた、エーヤワディ地方の伝統的なサラダです。",
+        "発酵させたエビと魚をハーブや香辛料で和えた、エーヤワディ地方の伝統料理です。"
+      ],
+      [
+        "たけのことハーブで作る、伝統的なスープです。",
+        "山菜や葉野菜を地元の調味料で煮込んだ、伝統料理です。",
+        "鶏肉と地元の野菜、香辛料を煮込んだ、伝統料理です。",
+        "もち米を竹筒で焼いて作る、伝統料理です。"
+      ],
+      [
+        "米粉で作ったゼリーに、パームシュガーシロップ、ココナッツミルク、かき氷を加えた、ミャンマーの伝統的なデザートです。暑い季節によく食べられます。"
+      ],
+      [
+        "米粉で作ったゼリーを黒糖シロップと氷で味わう、バゴー地方の伝統的なデザートです。",
+        "ココナッツミルク入りの鶏スープと中華麺を使った、ヤンゴンで人気の伝統的な麺料理です。"
+      ],
+      [
+        "ご飯とトマト、ハーブを和えた、伝統的なサラダです。",
+        "マンゴーサラダや魚料理などのおかずと一緒に味わう、モン州の伝統的なご飯料理です",
+        "魚を地元のハーブや野菜、香辛料で煮込んだ、モン州の伝統料理です。",
+        "干しエビや香辛料と一緒に炒めた、モン州の伝統的なエビペースト料理です。"
+      ],
+      [
+        "魚のだしを使ったスープに米麺や野菜を合わせた、タニンダーリ地方の伝統的なモヒンガーです。",
+        "幅広い米麺を魚介類や野菜と一緒に炒めた、タニンダーリ地方の伝統的な麺料理です。",
+        "米粉とココナッツミルクを使った、タニンダーリ地方の伝統的なデザートです。"
+      ]
+    ];
+
+
+    var posidiv = [];
+    var basestyle = "display:block;position:absolute;z-index:3;" + "width:24px;height:24px;" + "text-align:center;padding:2px 2px;" + "font-weight:bold;color:black;";
+    var xyfood = [
+      { key: "1", x: 250, y: 145, col: "gold" },
+      { key: "2", x: 150, y: 200, col: "gold" },
+      { key: "3", x: 65, y: 290, col: "gold" },
+      { key: "4", x: 285, y: 300, col: "gold" },
+      { key: "5", x: 170, y: 370, col: "gold" },
+      { key: "6", x: 110, y: 430, col: "gold" },
+      { key: "7", x: 50, y: 450, col: "gold" },
+      { key: "8", x: 250, y: 490, col: "gold" },
+      { key: "9", x: 140, y: 600, col: "gold" },
+      { key: "10", x: 275, y: 610, col: "gold" },
+      { key: "11", x: 190, y: 520, col: "gold" },
+      { key: "12", x: 180, y: 600, col: "gold" },
+      { key: "13", x: 260, y: 650, col: "gold" },
+      { key: "14", x: 320, y: 780, col: "gold" }
+    ];
+
+    function mappp(n) {
+      var parent = document.getElementById("ppup");
+      parent.innerHTML = "";
+
+      var ppwindow = document.createElement("div");
+      parent.appendChild(ppwindow);
+
+      var idx = Number(posidiv[n].innerHTML) - 1;
+      var html = "";
+
+      html += "<div class='regional-layout'>";
+
+      for (var i = 0; i < photos[idx].length; i++) {
+        html += "<div class='photo-box photo" + (i + 1) + "'>";
+
+        html += "<img src='photos/" + photos[idx][i] + "'>";
+
+        html += "<div class='photo-text'>";
+        html += "<h3>" + names[idx][i] + "</h3>";
+        html += "<p>" + explas[idx][i] + "</p>";
+        html += "</div>";
+
+        html += "</div>";
+      }
+
+      html += "</div>";
+
+      ppwindow.innerHTML = html;
+    }
+    function popup(n) {
+      mappp(n);
+    }
+    var posidiv = [];
+
+    var basestyle =
+      "display:block;position:absolute;z-index:3;" +
+      "width:24px;height:24px;" +
+      "text-align:center;line-height:24px;" +
+      "font-weight:bold;color:white;";
+
+    function main() {
+      basescene();
+    }
+
+    function basescene() {
+      var basediv = document.getElementById("map");
+
+      for (var i = 0; i < xyfood.length; i++) {
+        var div = document.createElement("div");
+
+        div.innerHTML = xyfood[i].key;
+
+        var left = xyfood[i].x;
+        var top = xyfood[i].y;
+        var col = xyfood[i].col;
+
+        div.style =
+          basestyle +
+          "left:" + left + "px;" +
+          "top:" + top + "px;" +
+          "background-color:" + col + ";";
+
+        div.setAttribute("onclick", "mappp(" + i + ")");
+
+        basediv.appendChild(div);
+        posidiv.push(div);
+      }
+    }
+
+    main();
+    var hero = document.getElementById("home");
+
+    var heroImages = [
+      "images/hero.png",
+      "images/hero1.png",
+      "images/hero2.png"
+    ];
+
+    var heroIndex = 0;
+
+    function changeHero() {
+      heroIndex++;
+
+      if (heroIndex >= heroImages.length) {
+        heroIndex = 0;
+      }
+
+      hero.style.backgroundImage =
+        "linear-gradient(rgba(0,0,0,.50), rgba(0,0,0,.65)), url('" + heroImages[heroIndex] + "')";
+    }
+
+    setInterval(changeHero, 3000);
+
+
+
+    function filterFood(category) {
+      var cards = document.getElementsByClassName("food-card");
+
+      for (var i = 0; i < cards.length; i++) {
+        if (category == "all" || cards[i].classList.contains(category)) {
+          cards[i].style.display = "block";
+        } else {
+          cards[i].style.display = "none";
+        }
+      }
+    }
+
+    function goToOsaka() {
+      location.href = "osaka.html";
+    }
+    function goToTokyo() {
+      location.href = "tokyo.html";
+    }
+    function goToKyoto() {
+      location.href = "kyoto.html";
+    }
+
+    var CellX = 4;
+    var CellY = 4;
+    var puzzleIds = [];
+    var puzzleImage = "";
+    var selectedPiece = -1;
+
+    function startPuzzle() {
+
+      var i = intRandom(names.length);
+      var j = intRandom(names[i].length);
+
+      puzzleImage = "photos/" + photos[i][j];
+
+      document.getElementById("puzzleTitle").innerHTML =
+        "<h3>" + names[i][j] + " のパズル</h3>";
+
+      setInitialPuzzle();
+      shufflePuzzle();
+      drawPuzzle();
+    }
+
+    function intRandom(n) {
+      return Math.floor(Math.random() * n);
+    }
+
+    function setInitialPuzzle() {
+      puzzleIds = [];
+
+      for (var i = 0; i < CellX * CellY; i++) {
+        puzzleIds.push(i);
+      }
+
+      selectedPiece = -1;
+    }
+
+    function shufflePuzzle() {
+      for (var i = 0; i < 100; i++) {
+        var a = intRandom(puzzleIds.length);
+        var b = intRandom(puzzleIds.length);
+
+        var temp = puzzleIds[a];
+        puzzleIds[a] = puzzleIds[b];
+        puzzleIds[b] = temp;
+      }
+
+      selectedPiece = -1;
+      drawPuzzle();
+    }
+
+    function drawPuzzle() {
+      var html = "";
+
+      for (var p = 0; p < puzzleIds.length; p++) {
+
+        var id = puzzleIds[p];
+
+        var originalX = id % CellX;
+        var originalY = Math.floor(id / CellX);
+
+        var className = "puzzle-piece";
+
+        if (p == selectedPiece) {
+          className += " selected-piece";
+        }
+
+        html += "<div class='" + className + "' ";
+        html += "onclick='selectPuzzlePiece(" + p + ")' ";
+        html += "style=\"";
+        html += "background-image:url('" + puzzleImage + "');";
+        html += "background-position:-" + (originalX * 100) + "px -" + (originalY * 100) + "px;";
+        html += "\">";
+        html += "</div>";
+      }
+
+      document.getElementById("puzzleBoard").innerHTML = html;
+
+      if (checkPuzzle()) {
+        document.getElementById("puzzleTitle").innerHTML += "<h2>🎉完成!!! おめでとう！🎊</h2>";
+      }
+    }
+
+    function selectPuzzlePiece(p) {
+
+      if (selectedPiece == -1) {
+        selectedPiece = p;
+      } else {
+        swapPuzzle(selectedPiece, p);
+        selectedPiece = -1;
+      }
+
+      drawPuzzle();
+    }
+
+    function swapPuzzle(a, b) {
+      var temp = puzzleIds[a];
+      puzzleIds[a] = puzzleIds[b];
+      puzzleIds[b] = temp;
+    }
+
+    function checkPuzzle() {
+      for (var i = 0; i < puzzleIds.length; i++) {
+        if (puzzleIds[i] != i) {
+          return false;
+        }
+      }
+      return true;
+    }
+    function showHint() {
+      if (puzzleImage == "") {
+        alert("先にゲームを開始してください。");
+        return;
+      }
+      var hint = document.getElementById("hint");
+
+      hint.innerHTML = "<h3>💡 Hint</h3>" + "<img src='" + puzzleImage + "'>";
+      hint.style.display = "block";
+      setTimeout(function () {
+        hint.style.display = "none"; hint.innerHTML = "";
+      }, 3000);
+    }
+  </script>
+
+</body>
+
+</html>

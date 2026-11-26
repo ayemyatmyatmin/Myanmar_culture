@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>東京のミャンマーレストラン</title>
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+html{
+  scroll-behavior:smooth;
+}
+body{
+  font-family:"Times New Roman", serif;
+  background:#080808;
+  color:#f7eedc;
+}
+.header{
+  text-align: center;
+  font-size: 23px;
+  background:rgba(0,0,0,0.75);
+}
+#restaurantCards{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:30px;
+  margin-top:40px;
+}
+
+.restaurant-card{
+  width:380px;
+  background:#151515;
+  border:1px solid #d4af37;
+  border-radius:16px;
+  overflow:hidden;
+  text-align:center;
+  padding-bottom:20px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.restaurant-card:hover{
+  transform:translateY(-6px);
+}
+
+.restaurant-card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  display:block;
+}
+
+.restaurant-card h2{
+  color:#d4af37;
+  margin:18px 10px 10px;
+}
+
+.restaurant-card p{
+  color:white;
+  margin:6px 12px;
+}
+
+a{
+  color:antiquewhite ;
+}
+</style>
+</head>
+
+<body>
+  <button type="button" onclick="goToMain()" style="width: 150px; height: 50px; border-radius: 20px; background-color:#d4af37; color:#1f1e1d;">
+      メインページへ戻る
+  </button>
+<div class="header">
+  <h1>東京のミャンマーレストラン</h1><br>
+  <p>東京で楽しめるミャンマー料理店を紹介します。</p><br>
+</div>
+
+<div id="restaurantList">
+  <h2 class="header">Restaurant List</h2>
+  <div id="restaurantCards" class="restaurant-cards"></div>
+</div>
+
+<script>
+function goToMain(){
+    location.href = "myanmar_food_div_clean.html";
+}
+var restaurantNames = [
+    "95YOOYA",
+    "OMG Myanmar Rakhine Traditional Cuisine",
+    "Golden Bagan Restaurant"
+];
+
+var restaurantPhotos = [
+    "95.png",
+    "omg.png",
+    "gold.png"
+];
+
+var restaurantRatings = [
+    "4.7",
+    "4.5",
+    "4.3"
+];
+
+var restaurantAddresses = [
+    "東京都渋谷区恵比寿4-22-7 恵比寿イーストスクエア 1F",
+    "東京都新宿区高田馬場 2-15-10 城北ビル 地下1階",
+    "東京都新宿区富久町8-20 カーサ富久町1F"
+];
+
+var restaurantLinks = [
+    "https://maps.app.goo.gl/N4xkydQefb5YG7NC8",
+    "https://maps.app.goo.gl/ZpC49U8Xzda3aieu7",
+    "https://maps.app.goo.gl/xeB1qWNCe7pZbdbJ6"
+];
+function showRestaurants(){
+
+    var html = "";
+
+    for(var i=0; i<restaurantNames.length; i++){
+      html += "<div class='restaurant-card' onclick='showDetail(" + i + ")'>";
+      html += "<img src='rest/" + restaurantPhotos[i] + "'>";
+      html += "<h2>" + restaurantNames[i] + "</h2>";
+      html += "<p>⭐ " + restaurantRatings[i] + "</p>";
+      html += "<p>" + restaurantAddresses[i] + "</p>";
+      html += "<a href='" + restaurantLinks[i] + "'>";
+      html += "📍 Google Map へ 。。。";
+      html += "</a>";
+      html += "</div>";
+    }
+
+    document.getElementById("restaurantCards").innerHTML = html;
+}
+showRestaurants();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Myanmar Culture Journey</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Times New Roman", serif;
+            background: #080808;
+            color: #f7eedc;
+        }
+
+        /* Navigation Bar */
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.85);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+        }
+
+        .navbar {
+            min-height: 90px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+        }
+
+        .logo {
+            color: #d4af37;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: #f7eedc;
+            text-decoration: none;
+            font-size: 22px;
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #d4af37;
+        }
+
+        /* Hero Section */
+
+        .hero {
+            width: 100%;
+            min-height: 100vh;
+
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.4),
+                    rgba(0, 0, 0, 0.7)),
+                url("images/bagan.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 130px 20px 40px;
+        }
+
+        .hero h1 {
+            font-size: 65px;
+            color: #d4af37;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .hero p {
+            font-size: 22px;
+            margin-bottom: 35px;
+            line-height: 1.8;
+        }
+
+        /* Button */
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 1px solid #d4af37;
+            border-radius: 30px;
+            background: transparent;
+            color: #d4af37;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #d4af37;
+            color: #080808;
+        }
+
+        /* Culture Section */
+
+        .section {
+            padding: 90px 40px;
+            text-align: center;
+            scroll-margin-top: 100px;
+        }
+
+        .section h2 {
+            font-size: 40px;
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+
+        .section-description {
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        /* Culture Cards */
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .card {
+            width: 450px;
+            max-width: 100%;
+            background: #151515;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #d4af37;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            aspect-ratio: 3 / 2;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-text {
+            padding: 30px;
+        }
+
+        .card h3 {
+            font-size: 30px;
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        /* Footer */
+
+        .footer {
+            background: #000;
+            color: #d4af37;
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid rgba(212, 175, 55, 0.4);
+        }
+
+        /* Mobile Responsive Design */
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .logo {
+                font-size: 25px;
+                text-align: center;
+            }
+
+            .nav-menu {
+                gap: 20px;
+            }
+
+            .nav-menu a {
+                font-size: 18px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section {
+                padding: 60px 20px;
+                scroll-margin-top: 120px;
+            }
+
+            .section h2 {
+                font-size: 30px;
+            }
+
+            .card {
+                width: 100%;
+            }
+
+            .card h3 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+
+    <div class="header">
+        <div class="navbar">
+
+            <div class="logo">
+                Myanmar Culture Journey
+            </div>
+
+            <ul class="nav-menu">
+
+                <li>
+                    <a href="#home">Home</a>
+                </li>
+
+                <li>
+                    <a href="myanmar_food_div_clean.html">Food</a>
+                </li>
+
+                <li>
+                    <a href="clothing.html">Clothing</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+
+
+    <!-- Hero Section -->
+
+    <div id="home" class="hero">
+
+        <div class="hero-text">
+
+            <h1>Discover Myanmar</h1>
+
+            <p>
+                ミャンマーの豊かな文化と伝統を知ろう。<br>
+                食文化や民族衣装を通して、<br>
+                ミャンマーの魅力を発見しよう。
+            </p>
+
+            <a href="#culture" class="btn">
+                Explore Myanmar
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Culture Section -->
+
+    <div id="culture" class="section">
+
+        <h2>Explore Our Culture</h2>
+
+        <p class="section-description">
+            興味のある文化を選んでください。
+        </p>
+
+        <div class="card-container">
+
+
+            <!-- Food Journey Card -->
+
+            <div class="card">
+
+                <img src="images/food.jpg" alt="ミャンマーの伝統料理">
+
+                <div class="card-text">
+
+                    <h3>Food Journey</h3>
+
+                    <p>
+                        ミャンマーの伝統料理や屋台料理、<br>
+                        地域ごとの食文化を紹介します。
+                    </p>
+
+                    <a href="myanmar_food_div_clean.html" class="btn">
+                        Explore Food
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Traditional Clothing Card -->
+
+            <div class="card">
+
+                <img src="images/clothing.png" alt="ミャンマーの民族衣装">
+
+                <div class="card-text">
+
+                    <h3>Traditional Clothing</h3>
+
+                    <p>
+                        ミャンマーのさまざまな民族の衣装や、<br>
+                        伝統的なデザインを紹介します。
+                    </p>
+
+                    <a href="clothing.html" class="btn">
+                        Explore Clothing
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+
+    <div class="footer">
+
+        <p>© Myanmar Culture Journey</p>
+
+    </div>
+
+</body>
+
+</html>

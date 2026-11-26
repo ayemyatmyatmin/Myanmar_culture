@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>モンの民族衣装</title>
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            min-height: 100dvh;
+            background: radial-gradient(ellipse at center, #38271c, #151210 65%, #080808);
+            color: #f7eedc;
+            font-family: Georgia, "Yu Mincho", serif;
+            display: flex;
+            flex-direction: column
+        }
+
+        a {
+            color: #d4af37;
+            text-decoration: none
+        }
+
+        a:hover {
+            text-decoration: underline
+        }
+
+        header,
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 16px 5%;
+            border-bottom: 1px solid #80652e
+        }
+
+        footer {
+            border-bottom: 0;
+            border-top: 1px solid #80652e;
+            margin-top: auto
+        }
+
+        header strong,
+        .gold,
+        h1,
+        h2 {
+            color: #d4af37
+        }
+
+        main {
+            width: min(1150px, 92%);
+            margin: auto;
+            padding: 18px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(20px, 5vw, 70px);
+            align-items: center
+        }
+
+        figure {
+            margin: 0;
+            text-align: center
+        }
+
+        figure img {
+            display: block;
+            width: 100%;
+            height: min(58vh, 540px);
+            object-fit: contain;
+            cursor: zoom-in
+        }
+
+        h1 {
+            font-size: clamp(30px, 4vw, 56px);
+            margin: 12px 0
+        }
+
+        h2 {
+            font-size: 19px;
+            margin: 20px 0 8px
+        }
+
+        p {
+            line-height: 1.8;
+            margin: 8px 0;
+            font-size: clamp(15px, 1.5vw, 19px)
+        }
+
+        .label {
+            letter-spacing: 3px;
+            color: #c3a365;
+            font-size: 12px
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #80652e;
+            margin: 20px 0
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #c3a365
+        }
+
+        .pair {
+            display: block;
+            text-align: center
+        }
+
+        .pair h1 {
+            font-size: clamp(26px, 3vw, 42px)
+        }
+
+        .pairgrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px
+        }
+
+        .pairgrid img {
+            height: min(42vh, 390px)
+        }
+
+        .pairgrid h2 {
+            margin: 10px 0 4px
+        }
+
+        .pairgrid p {
+            font-size: 15px
+        }
+
+        .zoom {
+            position: fixed;
+            inset: 0;
+            background: #080808f5;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 100
+        }
+
+        .zoom.show {
+            display: flex
+        }
+
+        .zoom img {
+            max-width: 96vw;
+            max-height: 96vh;
+            object-fit: contain
+        }
+
+        @media(max-width:650px) {
+
+            main,
+            .pairgrid {
+                grid-template-columns: 1fr
+            }
+
+            figure img,
+            .pairgrid img {
+                height: auto;
+                max-height: 55vh
+            }
+
+            header,
+            footer {
+                flex-wrap: wrap
+            }
+
+            header strong {
+                font-size: 12px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header><a href="clothing.html#collection">← Collection</a><strong>MYANMAR CULTURAL MUSEUM</strong><span
+            class="label">06 / 09</span></header>
+    <main>
+        <figure><img src="costumes/mon/main.jpg" alt="モンの伝統衣装">
+            <figcaption class="hint">画像にマウスを合わせると拡大できます。</figcaption>
+        </figure>
+        <section>
+            <div class="label">EXHIBITION 06 / 09</div>
+            <h1>モンの民族衣装</h1>
+            <hr>
+            <h2>衣装の特徴</h2>
+            <p>赤色を使ったロンジーなどが代表的な衣装の一つです。</p>
+            <h2>文化と伝統</h2>
+            <p>伝統衣装は祭りや文化行事などでも着用されます。</p>
+            <p class="hint">衣装は地域や行事によって異なります。</p>
+        </section>
+    </main>
+    <footer><a href="bamar.html">← 前の展示</a><a href="clothing.html#collection">民族衣装一覧</a><a href="rakhine.html">次の展示
+            →</a></footer>
+    <div class="zoom" aria-hidden="true"><img alt=""></div>
+    <script>const zoom = document.querySelector('.zoom'), large = zoom.querySelector('img'); let timer; function hide() { clearTimeout(timer); zoom.classList.remove('show') } document.querySelectorAll('figure img').forEach(img => { img.addEventListener('mouseenter', () => { timer = setTimeout(() => { large.src = img.src; zoom.classList.add('show') }, 500) }); img.addEventListener('mouseleave', hide) }); window.addEventListener('blur', hide); window.addEventListener('scroll', hide); document.addEventListener('keydown', e => { if (e.key === 'Escape') hide() });</script>
+</body>
+
+</html>

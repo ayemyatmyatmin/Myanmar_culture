@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>京都のミャンマーレストラン</title>
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+html{
+  scroll-behavior:smooth;
+}
+body{
+  font-family:"Times New Roman", serif;
+  background:#080808;
+  color:#f7eedc;
+}
+.header{
+  text-align: center;
+  font-size: 23px;
+  background:rgba(0,0,0,0.75);
+}
+#restaurantCards{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:30px;
+  margin-top:40px;
+}
+
+.restaurant-card{
+  width:380px;
+  background:#151515;
+  border:1px solid #d4af37;
+  border-radius:16px;
+  overflow:hidden;
+  margin-left: 550px;
+  text-align:center;
+  padding-bottom:20px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.restaurant-card:hover{
+  transform:translateY(-6px);
+}
+
+.restaurant-card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  display:block;
+}
+
+.restaurant-card h2{
+  color:#d4af37;
+  margin:18px 10px 10px;
+}
+
+.restaurant-card p{
+  color:white;
+  margin:6px 12px;
+}
+
+a{
+  color:antiquewhite ;
+}
+</style>
+</head>
+
+<body>
+  <button type="button" onclick="goToMain()" style="width: 150px; height: 50px; border-radius: 20px; background-color:#d4af37; color:#1f1e1d;">
+      メインページへ戻る
+  </button>
+<div class="header">
+  <h1>京都のミャンマーレストラン</h1><br>
+  <p>京都で楽しめるミャンマー料理店を紹介します。</p><br>
+</div>
+
+<div id="restaurantList">
+  <h2 class="header">Restaurant List</h2><br>
+  <div class="restaurant-card">
+    <img src="rest/rn.jpg">
+    <h2>RN Myanmar</h2>
+    <p>⭐ 4.0</p>
+    <p>京都府京都市左京区浄土寺馬場町17-2 北白川L1ビル</p>
+    <a href="https://maps.app.goo.gl/jhYuqXBTewDvYhnV8">
+        📍Google Mapへ。。。
+    </a>
+</div>
+</div>
+
+<script>
+function goToMain(){
+    location.href = "myanmar_food_div_clean.html";
+}
+</script>
+
+</body>
+</html>
